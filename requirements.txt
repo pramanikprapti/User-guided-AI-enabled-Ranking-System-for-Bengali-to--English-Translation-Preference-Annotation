@@ -1,0 +1,8 @@
+fastapi==0.111.0
+uvicorn==0.29.0
+transformers==4.41.2
+torch>=2.0.0          # Required by transformers & COMET
+unbabel-comet==2.2.1  # THIS is the correct local COMET scorer
+sqlalchemy==2.0.30
+streamlit==1.35.0
+requests>=2.31.0

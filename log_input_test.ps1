@@ -1,21 +1,21 @@
-# --------------------------------------------
-# log_input_test.ps1
-# --------------------------------------------
+# log_input_interactive.ps1
+# Run this AFTER starting your log_inputs_api.py on port 8001
 
-#  This script tests the /log_input endpoint via cURL
-# and hits your FastAPI server running on localhost:8001
+# Prompt user
+$source_bn = Read-Host "Enter Bengali"
+$reference_en = Read-Host "Enter English"
 
-$bengali = Read-Host "Enter Bengali"
-$english = Read-Host "Enter English"
-
-$jsonBody = @{
-    source_bn = $bengali
-    reference_en = $english
+# Build JSON
+$body = @{
+    source_bn = $source_bn
+    reference_en = $reference_en
 } | ConvertTo-Json
 
+# Send POST request
 $response = Invoke-RestMethod -Uri "http://127.0.0.1:8001/log_input" `
     -Method POST `
-    -Body $jsonBody `
+    -Body $body `
     -ContentType "application/json"
 
-Write-Host "`nServer response:" $response.message
+# Show server result
+Write-Host "`nServer response:" $response.message -ForegroundColor Cyan
